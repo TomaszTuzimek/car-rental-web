@@ -1,13 +1,14 @@
 pipeline {
   agent any
+  tools{
+    nodejs 'Node 14.20'
+  }
   stages {
-    stage('error') {
+    stage('Install and run') {
       steps {
-        tool(name: 'nodejs', type: 'Node 14.20')
         npm 'install'
         npm 'run dev'
       }
     }
-
   }
 }
