@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('error') {
       steps {
-        tool(name: 'nodejs', type: 'node 14.20')
+        tool(name: 'nodejs', type: 'Node 14.20')
         npm 'install'
         npm 'run dev'
       }
