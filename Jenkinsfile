@@ -1,16 +1,11 @@
 pipeline {
-  agent {
-    node {
-      label 'node'
-    }
-
-  }
+  agent any
   stages {
-    stage('') {
+    stage('error') {
       steps {
         tool(name: 'nodejs', type: 'node')
-        npm 'npm install'
-        npm 'npm run dev'
+        npm 'install'
+        npm 'run dev'
       }
     }
 
