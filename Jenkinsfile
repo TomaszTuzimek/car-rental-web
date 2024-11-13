@@ -24,6 +24,12 @@ pipeline {
       }
     }
 
+    stage('Email') {
+      steps {
+        emailext(attachLog: true, compressLog: true, subject: 'Car rental web log', body: 'Log in attachment', from: 'log', replyTo: 'thomek03@o2.pl')
+      }
+    }
+
   }
   tools {
     nodejs 'Node 14.20'
