@@ -1,21 +1,15 @@
 pipeline {
-  agent {
-    node {
-      label 'nodejs'
+  agent any
+  stages {
+    stage('Install node') {
+      steps {
+        npm 'install'
+      }
     }
 
-  }
-  stages {
-    stage('Install and Run') {
+    stage('') {
       steps {
-        script {
-          try {
-            sh 'npm install --cache'
-          } catch (err) {
-            error "Build failed: ${err.message}"
-          }
-        }
-
+        echo 'Console message after install'
       }
     }
 
