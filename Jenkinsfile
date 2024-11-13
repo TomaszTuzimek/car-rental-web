@@ -7,9 +7,20 @@ pipeline {
       }
     }
 
-    stage('') {
-      steps {
-        echo 'Console message after install'
+    stage('error') {
+      parallel {
+        stage('error') {
+          steps {
+            echo 'Console message after install'
+          }
+        }
+
+        stage('Success') {
+          steps {
+            echo 'All GOOD !'
+          }
+        }
+
       }
     }
 
