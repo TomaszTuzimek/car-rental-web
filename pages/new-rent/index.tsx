@@ -9,7 +9,7 @@ export default function NewRent() {
 
      const {data:session} = useSession()
 
-    const isAdmin = session?.user?.isAdmin ;
+    const isAdmin = session?.user?.name;
 
     function handleDateChange(){
 

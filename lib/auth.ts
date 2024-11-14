@@ -36,7 +36,7 @@ export const authConfig: NextAuthOptions = {
 
           const user = await getUserByEmail(email);
           
-          if (!user || !(await compare(password, user.password))) {
+          if (!user || !(await compare(password, user.password as string))) {
             return null;
           }
   
@@ -53,13 +53,13 @@ export const authConfig: NextAuthOptions = {
   },
   callbacks: {
     async jwt ({token, user}){
-      if(user){
+      if(user && 'isAdmin' in user){
         token.isAdmin = user.isAdmin;
       }
       return token;
     },
     async session({session, token}){
-      if(token){
+      if(token && 'isAdmin' in token && session.user !== undefined && 'isAdmin' in session.user){
         session.user.isAdmin = token.isAdmin; 
       }
       return session;

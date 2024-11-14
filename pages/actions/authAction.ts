@@ -72,7 +72,7 @@ export async function authUser(data: AuthSchema){
             data: {message: "User not found"},
         }
     }
-    const passwordMatch = await bcrypt.compare(password, user.password)
+    const passwordMatch = await bcrypt.compare(password, user.password as string)
     if(!passwordMatch){
         return{
             success : false,

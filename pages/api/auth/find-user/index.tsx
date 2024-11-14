@@ -6,7 +6,7 @@ export default async function loginHandler(req : NextApiRequest , res: NextApiRe
 
     if(req.method === 'POST'){
 
-        const userData: string = req.body
+        const userData = req.body
         const user = await prisma.user.findUnique({where: {email: userData.email}})
 
         if(user){
