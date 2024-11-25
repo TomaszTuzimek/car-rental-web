@@ -1,16 +1,14 @@
 pipeline {
-    agent {
-        label 'node-js'
-    }
+    agent any
     tools {
-        nodejs 'Node 14.20'
+        nodejs 'NodeJS 18.18.0'
     }
     stages {
         stage('Install and Run') {
             steps {
                 script {
                     try {
-                        sh 'npm install --cache'
+                        sh 'npm install'
                         sh 'npm run dev'
                     } catch (err) {
                         error "Build failed: ${err.message}"
