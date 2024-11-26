@@ -1,18 +1,11 @@
 pipeline {
   agent any
-  tools {
-    nodejs 'NodeJS 18.18.0'
-  }
-  triggers {
-    pollSCM('H/5 * * * *')
-  }
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'main', url: 'https://github.com/TomaszTuzimek/car-rental-web.git'
+        git(branch: 'main', url: 'https://github.com/TomaszTuzimek/car-rental-web.git')
       }
     }
-
 
     stage('Install and Run') {
       steps {
@@ -41,14 +34,24 @@ pipeline {
 
     stage('Email') {
       steps {
-        mail(subject: 'Jenkins test ok', charset: 'utf-8', from: 'test@wulkanizacja.gdynia.pl', replyTo: 'test@wulkanizacja.gdynia.pl', to: 'nes211nes211nes@gmail.com', body: 'Test body')
+        emailext(subject: 'Build #${BUILD_NUMBER} - ${JOB_NAME}', body: '"""                     <p>Project: ${JOB_NAME}</p>                     <p>Build Number: ${BUILD_NUMBER}</p>                     <p>Build Date: ${BUILD_DATE}</p>                     <p>Build Status: ${currentBuild.currentResult}</p>                     <p>Git Commit: ${env.GIT_COMMIT}</p>                     <p>Build URL: <a href="${BUILD_URL}">${BUILD_URL}</a></p>                 """', mimeType: 'text/html', to: 'nes211nes211nes@gmail.com', replyTo: 'test@wulkanizacja.gdynia.pl', from: 'test@wulkanizacja.gdynia.pl')
       }
     }
 
   }
-    post {
-        always {
-            sh 'docker system prune -f'
-        }
-    }  
+  tools {
+    nodejs 'NodeJS 18.18.0'
+  }
+  environment {
+    BUILD_DATE = '${new Date().format(\'yyyy-MM-dd HH:mm:ss\')}'
+  }
+  post {
+    always {
+      sh 'docker system prune -f'
+    }
+
+  }
+  triggers {
+    pollSCM('H/5 * * * *')
+  }
 }
