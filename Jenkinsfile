@@ -7,7 +7,7 @@ pipeline {
     pollSCM('H/5 * * * *')
   }
   stages {
-    tage('Checkout') {
+    stage('Checkout') {
       steps {
         git branch: 'main', url: 'https://github.com/TomaszTuzimek/car-rental-web.git'
       }
