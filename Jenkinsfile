@@ -1,12 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Checkout') {
-      steps {
-        git(branch: 'main', url: 'https://github.com/TomaszTuzimek/car-rental-web.git')
-      }
-    }
-
     stage('Install and Run') {
       steps {
         script {
