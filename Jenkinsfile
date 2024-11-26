@@ -42,9 +42,6 @@ pipeline {
   tools {
     nodejs 'NodeJS 18.18.0'
   }
-  environment {
-    BUILD_DATE = '${new Date().format(\'yyyy-MM-dd HH:mm:ss\')}'
-  }
   post {
     always {
       sh 'docker system prune -f'
