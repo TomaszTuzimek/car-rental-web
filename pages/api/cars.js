@@ -1,12 +1,12 @@
 import { MongoClient } from 'mongodb'
 
-async function meetups(req, res) {
+async function cars(req, res) {
 
     if(req.method === 'GET'){
         try {
             const client = await MongoClient.connect(process.env.MONGO_STRING)
             const db = client.db();
-            const carCollection = db.collection('meetup');
+            const carCollection = db.collection('cars');
             const cars = await carCollection.find().toArray();
             client.close();
             res.status(200).json(cars)

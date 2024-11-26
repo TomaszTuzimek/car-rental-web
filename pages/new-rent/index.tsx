@@ -8,17 +8,12 @@ import React from 'react'
 export default function NewRent() {
 
      const {data:session} = useSession()
-
-    const isAdmin = session?.user?.name;
-
+    //const isAdmin = session?.user?.name;
     function handleDateChange(){
-
     }
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-
-
         <DatePicker 
           label='start' 
           name='start'
@@ -28,9 +23,6 @@ export default function NewRent() {
           label='end' 
           name='end' 
         />
-
-
-
     </LocalizationProvider>
   )
 }

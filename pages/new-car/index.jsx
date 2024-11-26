@@ -20,7 +20,7 @@ export default function NewCar() {
                           </div>)
                         :
                           (<div>
-                            <p>You dont have premission to add new meetups</p>
+                            <p>You dont have premission to add new Car</p>
                             <p>Please <Link className='font-semibold' href="/login">log in</Link> to continue.</p>
                           </div>)
             }

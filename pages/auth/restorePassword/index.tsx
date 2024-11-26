@@ -6,7 +6,6 @@ import { Send } from '@mui/icons-material';
 import { useState } from 'react';
 import { emailSchema } from '../../../components/model/emailSchema';
 import { useRouter } from 'next/router';
-import type email from 'next-auth/providers/email';
 
 export default function PasswordRestore() {
     const router = useRouter();

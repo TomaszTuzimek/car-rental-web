@@ -3,7 +3,7 @@ import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { getUserByEmail } from "../pages/actions/authAction"; // Your custom method
+import { getUserByEmail } from "../pages/actions/authAction";
 import { compare } from "bcryptjs";
 import { prisma } from './prisma-client';
 import { authSchema } from '../components/model/authSchema';
@@ -34,13 +34,17 @@ export const authConfig: NextAuthOptions = {
           }
           const {email, password} = validated.data;
 
-          const user = await getUserByEmail(email);
-          
-          if (!user || !(await compare(password, user.password as string))) {
+          try {
+              const user = await getUserByEmail(email);
+              
+              if (!user || !(await compare(password, user.password as string))) {
+                return null;
+              }
+              return user;
+          } catch (error) {
+            console.error("Error during user authentication", error);
             return null;
           }
-  
-          return user;
         }
     })
   ],

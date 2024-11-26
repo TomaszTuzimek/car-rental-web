@@ -38,18 +38,15 @@ export async function getStaticPaths(){
                                           })
                               ),
                               fallback:false,
-
-}
+  }
 }
 
 export async function getStaticProps(context){
   const carId = context.params.carId;
 
-
   const connection = await MongoClient.connect(process.env.MONGO_STRING);
   const db = connection.db();
   const carCollection = db.collection('cars');
-
   const car = await carCollection.findOne({_id: carId})
 
   return(

@@ -6,7 +6,7 @@ export default function HomePage(props) {
   return (
     <>
             <Head>
-                <title>React meetups</title>
+                <title>Car Rental</title>
                 <meta 
                     name='description' 
                     content='Car rental'></meta>

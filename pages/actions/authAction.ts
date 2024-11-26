@@ -9,7 +9,7 @@ import { Prisma } from "@prisma/client";
 
 
 export async function registerUser(data: RegisterSchema){
-    const validatedData = registerSchema.safeParse(data);
+    const validatedData = await registerSchema.safeParse(data);
 
     if(!validatedData.success){
         return {
@@ -37,6 +37,7 @@ export async function registerUser(data: RegisterSchema){
             data: {createdUser}
         }
     } catch (error) {
+        
         if(error instanceof Prisma.PrismaClientKnownRequestError){
             if(error.code === 'P2002'){
                 return{
@@ -53,7 +54,7 @@ export async function registerUser(data: RegisterSchema){
     }
 }
 
-export async function authUser(data: AuthSchema){
+export default async function authUser(data: AuthSchema){
     const validatedData = authSchema.safeParse(data);
     if(!validatedData.success){
         return {
@@ -83,12 +84,11 @@ export async function authUser(data: AuthSchema){
     return{
         success : true,
         auth: true,
-        data: {message: "User logged", token: "tokenForApi"},
+        data: {message: "User logged", token: 'token'},
     }
 }
 export async function getUserByEmail(email : string) {
-    return prisma.user.findUnique({where: {email}});
+    return await prisma.user.findUnique({where: {email}});
 }
 export async function setPasswordIfIsEmpty(email: string, password:string){
 }
-

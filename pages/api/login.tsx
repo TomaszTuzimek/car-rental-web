@@ -11,7 +11,7 @@ export default async function loginHandler(req : NextApiRequest , res: NextApiRe
         const userFromPrisma = await prisma.user.findUnique({where: {email: userData.email}})
        
         if(userFromPrisma){
-            const result = bcryptjs.compare(userData.password, userFromPrisma.password as string);
+            const result = await bcryptjs.compare(userData.password, userFromPrisma.password as string);
 
             if (!result) return res.status(401).json({message: 'Password not match'});
 

@@ -4,10 +4,8 @@ import { useRouter } from "next/router";
 import Card from "../../../components/ui/Card";
 import { registerSchema, type RegisterSchema } from '../../../components/model/registerSchema';
 import { signIn } from "next-auth/react";
-import { TextField, Button, Icon } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { Send } from "@mui/icons-material";
-import type { size } from "lodash";
-
 
 const RegisterNewUser: FC = ()=>{
 

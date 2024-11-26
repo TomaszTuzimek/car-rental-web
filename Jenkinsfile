@@ -3,7 +3,17 @@ pipeline {
   tools {
     nodejs 'NodeJS 18.18.0'
   }
+  triggers {
+    pollSCM('H/5 * * * *')
+  }
   stages {
+    tage('Checkout') {
+      steps {
+        git branch: 'main', url: 'https://github.com/TomaszTuzimek/car-rental-web.git'
+      }
+    }
+
+
     stage('Install and Run') {
       steps {
         script {
@@ -25,7 +35,7 @@ pipeline {
 
     stage('Docker container') {
       steps {
-        sh 'npm install'
+        sh 'docker build -t car-rental-web-app .'
       }
     }
 
@@ -36,4 +46,9 @@ pipeline {
     }
 
   }
+    post {
+        always {
+            sh 'docker system prune -f'
+        }
+    }  
 }

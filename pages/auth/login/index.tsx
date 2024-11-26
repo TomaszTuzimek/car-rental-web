@@ -1,6 +1,6 @@
 'use client'
 import {signIn} from "next-auth/react"
-import { useRef, useState, type FC } from "react";
+import { useState, type FC } from "react";
 import { useRouter } from "next/router";
 import Card from "../../../components/ui/Card";
 import { authSchema, type AuthSchema } from "../../../components/model/authSchema";
@@ -131,12 +131,10 @@ const LogIn: FC = ()=>{
                             }}
                         >
                             Send
-                        </Button>
-                            
+                        </Button> 
                         </div>
                         <div className="h-5">
-                        </div>
-                                    
+                        </div>  
                     </form>
                 </Card>
     )

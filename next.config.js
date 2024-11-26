@@ -21,12 +21,6 @@ const nextConfig = {
     formats: ['image/webp'], // Enable WebP support
   },
 
-  // Enable i18n (Internationalization) support
-  i18n: {
-    locales: ['en', 'fr', 'es'],
-    defaultLocale: 'en',
-  },
-
   // Custom URL rewrites (useful for SEO or routing)
   async rewrites() {
     return [
